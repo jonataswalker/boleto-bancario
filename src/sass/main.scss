@@ -1,0 +1,89 @@
+@import 'functions';
+@import 'sizes';
+@import 'logo';
+
+*,
+*:before,
+*:after {
+  box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial;
+  font-size: 12px;
+  color: #000;
+}
+
+#container {
+  width: map-deep-get($sizes, 'container', 'width');
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+.boleto {
+  width: map-deep-get($sizes, 'container', 'width');
+
+  .cut {
+    width: map-deep-get($sizes, 'container', 'width');
+    margin: 0px auto;
+    border-bottom: 1px navy dashed;
+
+    p {
+      margin: 0 0 5px 0;
+      padding: 0px;
+      font-family: 'Arial Narrow';
+      font-size: 9px;
+      color: navy;
+    }
+  }
+}
+
+div.footer {
+  margin-bottom: 30px;
+
+  p {
+    width: map-deep-get($sizes, 'footer', 'width');
+    padding-left: 525px;
+    font-family: 'Arial Narrow';
+    font-size: 9px;
+    color: navy;
+  }
+}
+
+div.footer2 {
+  width: 100%;
+  text-align: right;
+  font-size: 10px;
+}
+
+div.barcode {
+}
+
+.barcode {
+  width: map-deep-get($sizes, 'container', 'width');
+  height: 50px;
+  margin-bottom: 10px;
+
+  div {
+    display: inline-block;
+    height: 100%;
+  }
+
+  .black {
+    border-color: #000;
+    border-left-style: solid;
+    width: 0px;
+  }
+
+  .white { background: #fff }
+  .thin.black { border-left-width: 1px }
+  .large.black { border-left-width: 3px }
+  .thin.white { width: 1px }
+  .large.white { width: 3px }
+}
+
+
+
+@import 'table';

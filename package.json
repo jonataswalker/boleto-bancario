@@ -1,0 +1,56 @@
+{
+  "name": "boleto-bb",
+  "version": "0.0.1",
+  "description": "Boleto para o Banco do Brasil",
+  "main": "build/boleto-bb.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonataswalker/ol3-contextmenu.git"
+  },
+  "homepage": "https://github.com/jonataswalker/boleto-bb",
+  "author": "Jonatas Walker <jonataswalker@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "build:css": "node build-css",
+    "build:js": "yarn run lint && node build-js",
+    "build": "yarn run build:js && yarn run build:css",
+    "watch:js": "nodemon --on-change-only --watch src --ext js,vue,html --exec 'yarn run build:js'",
+    "watch:css": "nodemon --on-change-only --watch src --ext    scss --exec 'yarn run build:css'",
+    "watch": "yarn run watch:js & yarn run watch:css",
+    "build:watch": "yarn run build && yarn run watch"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-jwalker": "^1.15.0",
+    "eslint-plugin-html": "^2.0.0",
+    "fs-jetpack": "^0.10.5",
+    "node-sass": "^4.3.0",
+    "nodemon": "^1.11.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-vue": "^2.2.18",
+    "uglify-js": "^2.7.5"
+  },
+  "dependencies": {
+    "moment": "^2.17.1",
+    "vue": "^2.1.10"
+  },
+  "eslintConfig": {
+    "extends": "jwalker",
+    "plugins": [
+      "html"
+    ],
+    "rules": {
+      "no-console": 0,
+      "no-use-before-define": 1,
+      "no-unused-vars": 1,
+      "eol-last": 1,
+      "vars-on-top": 1
+    },
+    "globals": {}
+  }
+}

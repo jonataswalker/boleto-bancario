@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>Exemplo 1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../build/boleto-bb.css" rel="stylesheet">
+  </head>
+  <body>
+    <script>
+    </script>
+    <div id="boleto"></div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/moment/moment.js"></script>
+    <script src="../build/boleto-bb.debug.js"></script>
+    <script>
+      const cedente = {
+        agencia: 1724,
+        conta: 10403005,
+        nome: 'Empresa de cosméticos LTDA',
+        cpfCnpj: '12.345.678/0001-90'
+      };
+
+      const pagador = {
+        nome: 'Fulano de Tal',
+        cpfCnpj: '222.222.222-22',
+        endereco: 'Av. Rubéns de Mendonça, 157 - 78008-000 - Cuiabá-MT'
+      };
+
+      const dadosBoleto = {
+        convenio: 1234,
+        carteira: 18,
+        sequencial: 1234567,
+        // datas
+        dataEmissao: '30/10/2017',
+        dataVencimento: '05/11/2017',
+        // valores
+        valor: 23,
+        // mensagens
+        instrucao1: 'Conceder desconto de R$ 10,00 até o vencimento',
+        instrucao2: 'Multa de R$ 2,34 após o vencimento',
+        instrucao3: 'Mora de R$ 0,76 ao dia após o vencimento',
+        instrucao4: 'NÃO RECEBER APÓS 15/11/2006',
+        instrucao4: 'Protestar após 10 dias de vencido',
+        instrucao5: 'Após vencimento pagável somente nas agências do Banco do Brasil',
+        instrucao6: 'Agradecemos a preferência, volte sempre!'
+      };
+
+      const boleto = new BoletoBB({
+        cedente: cedente,
+        pagador: pagador,
+        boleto: dadosBoleto
+      });
+      // boleto.setCedente(cedente);
+      // boleto.setPagador(pagador);
+      // boleto.geraBoleto(dadosBoleto);
+      boleto.render('#boleto');
+    </script>
+  </body>
+</html>

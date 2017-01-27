@@ -1,0 +1,172 @@
+table.header {
+  width: map-deep-get($sizes, 'container', 'width');
+  height: map-deep-get($sizes, 'header', 'height');
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px navy solid;
+
+  .logoBanco {
+    width: map-deep-get($sizes, 'logoBanco', 'width');
+    background-image: $logoBB;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .codBanco {
+    width: map-deep-get($sizes, 'codBanco', 'width');
+
+    > div {
+      width: map-deep-get($sizes, 'codBancoChild', 'width');
+      height: map-deep-get($sizes, 'codBancoChild', 'height');
+      margin-left: 5px;
+      padding-top: 3px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: navy;
+      border-right: 2px solid navy;
+      border-left: 2px solid navy;
+    }
+  }
+
+  .linhaDigitavel {
+    width: map-deep-get($sizes, 'linhaDigitavel', 'width');
+    text-align: right;
+    font: bold 15px Arial;
+    color: navy;
+  }
+}
+
+table.line {
+  margin-bottom: 3px;
+  padding-bottom: 1px;
+  border-bottom: 1px black solid;
+
+  .titulos td {
+    height: 13px;
+    font-family: Arial;
+    font-size: 9px;
+    color: navy;
+    border-left: 5px #ffe000 solid;
+    padding-left: 2px;
+  }
+
+  .campos {
+    td {
+      height: 12px;
+      font-size: 10px;
+      font-weight: bold;
+      color: black;
+      border-left: 5px #ffe000 solid;
+      padding-left: 2px;
+
+      p { font-size: 10px }
+    }
+
+    .sacadorAvalista { width: map-deep-get($sizes, 'localPgto', 'width') }
+
+    .agCedente,
+    .nossoNumero,
+    .valorDoc,
+    .vencimento2,
+    .agCedente2,
+    .nossoNumero2,
+    .xvalor { text-align: right }
+
+    .especie,
+    .qtd,
+    .vencimento,
+    .especieDoc,
+    .aceite,
+    .carteira,
+    .especie2,
+    .qtd2 { text-align: center }
+  }
+
+  .lastLine {
+    vertical-align: top;
+    height: 25px;
+
+    table.line {
+      margin-bottom: -5px;
+      border: 0 white none;
+
+      .instrucoes {
+        border-left: 0 white none;
+        padding-left: 5px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        height: 20px;
+        vertical-align: top;
+      }
+    }
+  }
+
+  .cedente { width: map-deep-get($sizes, 'cedente', 'width') }
+  .agCedente { width: map-deep-get($sizes, 'agCedente', 'width') }
+  .especie { width: map-deep-get($sizes, 'especie', 'width') }
+  .qtd { width: map-deep-get($sizes, 'qtd', 'width') }
+  .numDoc { width: map-deep-get($sizes, 'numDoc', 'width') }
+  .contrato { width: map-deep-get($sizes, 'contrato', 'width') }
+  .cpfCnpj { width: map-deep-get($sizes, 'cpfCnpj', 'width') }
+  .vencimento { width: map-deep-get($sizes, 'vencimento', 'width') }
+  .desconto { width: map-deep-get($sizes, 'numDoc', 'width') }
+  .outrasDeducoes { width: map-deep-get($sizes, 'outrasDeducoes', 'width') }
+  .moraMulta { width: map-deep-get($sizes, 'numDoc', 'width') }
+  .outrosAcrescimos { width: map-deep-get($sizes, 'numDoc', 'width') }
+  .sacado { width: map-deep-get($sizes, 'sacado', 'width') }
+  .localPgto { width: map-deep-get($sizes, 'localPgto', 'width') }
+  .cedente2 { width: map-deep-get($sizes, 'localPgto', 'width') }
+  .dataDoc { width: map-deep-get($sizes, 'dataDoc', 'width') }
+  .numDoc2 { width: map-deep-get($sizes, 'numDoc2', 'width') }
+  .especieDoc { width: map-deep-get($sizes, 'contrato', 'width') }
+  .aceite { width: map-deep-get($sizes, 'aceite', 'width') }
+  .dataProcess { width: map-deep-get($sizes, 'contrato', 'width') }
+  .carteira { width: map-deep-get($sizes, 'dataDoc', 'width') }
+  .especie2 { width: map-deep-get($sizes, 'qtd', 'width') }
+  .qtd2 { width: map-deep-get($sizes, 'qtd2', 'width') }
+  .instrucoes { width: map-deep-get($sizes, 'instrucoes', 'width') }
+  .sacado2 { width: map-deep-get($sizes, 'sacado', 'width') }
+  .sacadorAvalista { width: map-deep-get($sizes, 'sacado', 'width') }
+  .reservado { width: map-deep-get($sizes, 'dataDoc', 'width') }
+
+  .valorDoc,
+  .valorCobrado,
+  .agCedente2,
+  .nossoNumero2,
+  .desconto2,
+  .vencimento2,
+  .outrasDeducoes2,
+  .moraMulta2,
+  .outrosAcrescimos2,
+  .valorCobrado2 {
+    width: map-deep-get($sizes, 'valorDoc', 'width');
+    padding-right: 5px;
+  }
+
+  .valorCobrado,
+  .vencimento2,
+  .reservado,
+  .valorCobrado2 { background-color: #ffc; }
+
+  .valorCobrado2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .xvalor {
+    width: map-deep-get($sizes, 'xvalor', 'width');
+    padding-right: 5px;
+  }
+
+  .codBaixa {
+    width: map-deep-get($sizes, 'codBaixa', 'width');
+    color: navy !important;
+    font-weight: normal !important;
+  }
+
+  .nossoNumero {
+    width: map-deep-get($sizes, 'nossoNumero', 'width');
+    padding-right: 5px;
+  }
+}
