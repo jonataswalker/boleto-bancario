@@ -1,14 +1,14 @@
 /*!
- * boleto-bb - v0.0.1
- * Boleto para o Banco do Brasil
- * https://github.com/jonataswalker/boleto-bb
- * Built: Fri Jan 27 2017 20:01:59 GMT-0200 (BRST)
+ * boleto-bancario - v0.0.1
+ * Solução para geração de boletos bancários
+ * https://github.com/jonataswalker/boleto-bancario
+ * Built: Sat Jan 28 2017 11:50:48 GMT-0200 (BRST)
  */
 
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue'), require('moment')) :
 	typeof define === 'function' && define.amd ? define(['vue', 'moment'], factory) :
-	(global.BoletoBB = factory(global.Vue,global.moment));
+	(global.BoletoBancario = factory(global.Vue,global.moment));
 }(this, (function (Vue,moment) { 'use strict';
 
 Vue = 'default' in Vue ? Vue['default'] : Vue;

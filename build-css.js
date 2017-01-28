@@ -12,13 +12,12 @@ const banner = jetpack.read('banner.js')
 
 sass.render({
   file: 'src/sass/main.scss',
-  // outputStyle: 'compressed',
-  // importer: jsonImporter
+  outputStyle: 'compressed'
 }, (err, result) => {
   if (err) throw err.message;
 
   const dest = jetpack.cwd('build');
-  dest.write('boleto-bb.css', banner + result.css);
+  dest.write('boleto-bancario.css', banner + result.css);
 
   console.log('Built: ', new Date());
 });

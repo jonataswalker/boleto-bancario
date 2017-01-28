@@ -4,7 +4,7 @@
     <title>Exemplo 1</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../build/boleto-bb.css" rel="stylesheet">
+    <link href="../build/boleto-bancario.css" rel="stylesheet">
   </head>
   <body>
     <script>
@@ -12,7 +12,8 @@
     <div id="boleto"></div>
     <script src="../node_modules/vue/dist/vue.js"></script>
     <script src="../node_modules/moment/moment.js"></script>
-    <script src="../build/boleto-bb.debug.js"></script>
+    <script src="../build/boleto-bancario.js"></script>
+    <!-- <script src="../build/boleto-bancario.standalone.js"></script> -->
     <script>
       const cedente = {
         agencia: 1724,
@@ -46,7 +47,7 @@
         instrucao6: 'Agradecemos a preferência, volte sempre!'
       };
 
-      const boleto = new BoletoBB({
+      const boleto = new BoletoBancario({
         cedente: cedente,
         pagador: pagador,
         boleto: dadosBoleto

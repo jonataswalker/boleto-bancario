@@ -1,24 +1,37 @@
 {
-  "name": "boleto-bb",
+  "name": "boleto-bancario",
   "version": "0.0.1",
-  "description": "Boleto para o Banco do Brasil",
-  "main": "build/boleto-bb.js",
+  "description": "Solução para geração de boletos bancários",
+  "main": "build/boleto-bancario.cjs.js",
+  "files": [
+    "build",
+    "src"
+  ],
+  "keywords": [
+    "boleto bancário"
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jonataswalker/ol3-contextmenu.git"
+    "url": "git://github.com/jonataswalker/boleto-bancario.git"
   },
-  "homepage": "https://github.com/jonataswalker/boleto-bb",
+  "homepage": "https://github.com/jonataswalker/boleto-bancario",
   "author": "Jonatas Walker <jonataswalker@gmail.com>",
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "build:css": "node build-css",
-    "build:js": "yarn run lint && node build-js",
-    "build": "yarn run build:js && yarn run build:css",
-    "watch:js": "nodemon --on-change-only --watch src --ext js,vue,html --exec 'yarn run build:js'",
-    "watch:css": "nodemon --on-change-only --watch src --ext    scss --exec 'yarn run build:css'",
+    "build:browser-dev": "yarn run lint && rollup -c --environment BROWSER,DEV && node minify",
+    "build:browser": "yarn run lint && rollup -c --environment BROWSER && node minify",
+    "build:browserfull-dev": "yarn run lint && rollup -c --environment STANDALONE,DEV",
+    "build:browserfull": "yarn run lint && rollup -c --environment STANDALONE",
+    "build:cjs-dev": "yarn run lint && rollup -c --environment DEV",
+    "build:cjs": "yarn run lint && rollup -c",
+    "build": "yarn run build:browser && yarn run build:browserfull && yarn run build:cjs && yarn run build:css",
+    "build:dev": "yarn run build:browser-dev && yarn run build:browserfull-dev && yarn run build:cjs-dev && yarn run build:css",
+    "watch:js": "nodemon --on-change-only --watch src --ext js,vue,html --exec 'yarn run build:browser && yarn run build:cjs'",
+    "watch:css": "nodemon --on-change-only --watch src --ext scss --exec 'yarn run build:css'",
     "watch": "yarn run watch:js & yarn run watch:css",
-    "build:watch": "yarn run build && yarn run watch"
+    "build:watch": "yarn run build:dev && yarn run watch"
   },
   "devDependencies": {
     "eslint": "^3.14.1",
@@ -32,6 +45,7 @@
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
     "rollup-plugin-vue": "^2.2.18",
     "uglify-js": "^2.7.5"
   },
