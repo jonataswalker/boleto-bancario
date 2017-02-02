@@ -2,7 +2,7 @@
  * boleto-bancario - v0.0.1
  * Solução para geração de boletos bancários
  * https://github.com/jonataswalker/boleto-bancario
- * Built: Sat Jan 28 2017 11:50:48 GMT-0200 (BRST)
+ * Built: Thu Feb 02 2017 15:01:15 GMT-0200 (BRST)
  */
 
 (function (global, factory) {
@@ -14,90 +14,69 @@
 Vue = 'default' in Vue ? Vue['default'] : Vue;
 moment = 'default' in moment ? moment['default'] : moment;
 
-var U = {
-  /** Pad a number with 0 on the left */
-  zeroPad: function zeroPad(number, digits) {
-    var num = number + '';
-    while (num.length < digits) { num = '0' + num; }
-    return num;
-  },
-  formataDinheiro: function formataDinheiro(n) {
-    return n.toFixed(2)
-      .replace('.', ',')
-      .replace(/(\d)(?=(\d{3})+,)/g, '$1.');
-  },
-  /**
-   * http://stackoverflow.com/a/14428340/4640499
-   * @param integer number: number to be processed
-   * @param integer n: length of decimal
-   * @param integer x: length of whole part
-   * @param mixed   s: sections delimiter
-   * @param mixed   c: decimal delimiter
-   */
-  format: function format(number, n, x, s, c) {
-    var re = [
-      '\\d(?=(\\d{',
-      (x || 3),
-      '})+',
-      (n > 0 ? '\\D' : '$'),
-      ')'
-    ].join('');
-    var num = number.toFixed(Math.max(0, ~~n));
+/** Pad a number with 0 on the left */
+function zeroPad(number, digits) {
+  var num = number + '';
+  while (num.length < digits) { num = '0' + num; }
+  return num;
+}
 
-    return (c ? num.replace('.', c) : num)
-      .replace(new RegExp(re, 'g'), '$&' + (s || ','));
-  },
-  /**
-   * http://locutus.io/php/strings/number_format/
-   */
-  numberFormat: function numberFormat(number, decimals, decPoint, thousandsSep) {
-    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-    var n = !isFinite(+number) ? 0 : +number;
-    var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
-    var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep;
-    var dec = (typeof decPoint === 'undefined') ? '.' : decPoint;
-    var s = '';
+function formataDinheiro(n) {
+  return n.toFixed(2)
+    .replace('.', ',')
+    .replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+}
 
-    var toFixedFix = function (nn, preci) {
-      var k = Math.pow(10, preci);
-      return '' + (Math.round(nn * k) / k).toFixed(preci);
-    };
+/**
+ * http://stackoverflow.com/a/14428340/4640499
+ * @param integer number: number to be processed
+ * @param integer n: length of decimal
+ * @param integer x: length of whole part
+ * @param mixed   s: sections delimiter
+ * @param mixed   c: decimal delimiter
+ */
 
-    // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
-    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-    if (s[0].length > 3) {
-      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-    }
-    if ((s[1] || '').length < prec) {
-      s[1] = s[1] || '';
-      s[1] += new Array(prec - s[1].length + 1).join('0');
-    }
 
-    return s.join(dec);
-  },
+/**
+ * http://locutus.io/php/strings/number_format/
+ */
+function numberFormat(number, decimals, decPoint, thousandsSep) {
+  number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number;
+  var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+  var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep;
+  var dec = (typeof decPoint === 'undefined') ? '.' : decPoint;
+  var s = '';
 
-  /**
-   * Overwrites obj1's values with obj2's and adds
-   * obj2's if non existent in obj1
-   * @returns obj3 a new object based on obj1 and obj2
-   */
-  merge: function merge(obj1, obj2) {
-    var obj3 = {};
-    for (var attr1 in obj1) { obj3[attr1] = obj1[attr1]; }
-    for (var attr2 in obj2) { obj3[attr2] = obj2[attr2]; }
-    return obj3;
-  },
-  assert: function assert(condition, message) {
-    if ( message === void 0 ) message = 'Assertion failed';
+  var toFixedFix = function (nn, preci) {
+    var k = Math.pow(10, preci);
+    return '' + (Math.round(nn * k) / k).toFixed(preci);
+  };
 
-    if (!condition) {
-      if (typeof Error !== 'undefined') {
-        throw new Error(message);
-      }
-      throw message; // Fallback
-    }
+  // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
   }
-};
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+
+  return s.join(dec);
+}
+
+/**
+ * Overwrites obj1's values with obj2's and adds
+ * obj2's if non existent in obj1
+ * @returns obj3 a new object based on obj1 and obj2
+ */
+function merge(obj1, obj2) {
+  var obj3 = {};
+  for (var attr1 in obj1) { obj3[attr1] = obj1[attr1]; }
+  for (var attr2 in obj2) { obj3[attr2] = obj2[attr2]; }
+  return obj3;
+}
 
 var cedente = {
   agencia: '',
@@ -290,7 +269,7 @@ var A = {
    */
   getNumeroFebraban: function getNumeroFebraban() {
     return [
-      U.zeroPad(vm.$data.bancoAtivo, 3),
+      zeroPad(vm.$data.bancoAtivo, 3),
       moeda,
       this.getDigitoVerificador(),
       this.getFatorVencimento(),
@@ -305,7 +284,7 @@ var A = {
    */
   getDigitoVerificador: function getDigitoVerificador() {
     var num = [
-      U.zeroPad(vm.$data.bancoAtivo, 4),
+      zeroPad(vm.$data.bancoAtivo, 4),
       moeda,
       this.getFatorVencimento(),
       this.getValorZeroFill(),
@@ -352,7 +331,7 @@ var A = {
    */
   getValorZeroFill: function getValorZeroFill() {
     var valor = vm.$data.boleto.valor;
-    return U.zeroPad(U.numberFormat(valor, 2, '', ''), 10);
+    return zeroPad(numberFormat(valor, 2, '', ''), 10);
   },
 
   /**
@@ -461,18 +440,18 @@ var BB = {
     switch (convenio.toString().length) {
       // Convênio de 4 dígitos, são 11 dígitos no nosso número
       case 4:
-        numero = U.zeroPad(convenio, 4) + U.zeroPad(sequencial, 7);
+        numero = zeroPad(convenio, 4) + zeroPad(sequencial, 7);
         break;
       // Convênio de 6 dígitos, são 11 dígitos no nosso número
       case 6:
         // Exceto no caso de ter a carteira 21, onde são 17 dígitos
         numero = carteira === 21
-          ? U.zeroPad(sequencial, 17)
-          : U.zeroPad(convenio, 6) + U.zeroPad(sequencial, 5);
+          ? zeroPad(sequencial, 17)
+          : zeroPad(convenio, 6) + zeroPad(sequencial, 5);
         break;
       // Convênio de 7 dígitos, são 17 dígitos no nosso número
       case 7:
-        numero = U.zeroPad(convenio, 7) + U.zeroPad(sequencial, 10);
+        numero = zeroPad(convenio, 7) + zeroPad(sequencial, 10);
         break;
       // Não é com 4, 6 ou 7 dígitos? Não existe.
       default:
@@ -507,7 +486,7 @@ var BB = {
     if (boleto.sequencial.toString().length > 10) {
       if (len === 6 && boleto.carteira === 21) {
         // Convênio (6) + Nosso número (17) + Carteira (2)
-        return [U.zeroPad(boleto.convenio, 6), nossoNumero, 21].join('');
+        return [zeroPad(boleto.convenio, 6), nossoNumero, 21].join('');
       } else {
         // eslint-disable-next-line max-len
         throw new Error('Só é possível criar um boleto com mais de 10 dígitos no nosso número quando a carteira é 21 e o convênio possuir 6 dígitos.');
@@ -520,13 +499,13 @@ var BB = {
         // Nosso número (11) + Agencia (4) + Conta (8) + Carteira (2)
         return [
           nossoNumero,
-          U.zeroPad(vm.$data.cedente.agencia, 4),
-          U.zeroPad(vm.$data.cedente.conta, 8),
-          U.zeroPad(boleto.carteira, 2)
+          zeroPad(vm.$data.cedente.agencia, 4),
+          zeroPad(vm.$data.cedente.conta, 8),
+          zeroPad(boleto.carteira, 2)
         ].join('');
       case 7:
         // Zeros (6) + Nosso número (17) + Carteira (2)
-        return ['000000', nossoNumero, U.zeroPad(boleto.carteira, 2)].join('');
+        return ['000000', nossoNumero, zeroPad(boleto.carteira, 2)].join('');
     }
 
     throw new Error('O código do convênio precisa ter 4, 6 ou 7 dígitos!');
@@ -555,6 +534,7 @@ var Boleto = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_
     this.C.agenciaCodigo = A.getAgenciaCodigoCedente();
     this.codigoBarras = A.getImagemCodigoDeBarras();
     this.linhaDigitavel = A.getLinhaDigitavel();
+    this.B.valor = formataDinheiro(this.B.valor);
   }
 };
 
@@ -582,15 +562,15 @@ var BoletoBB = function BoletoBB(obj) {
 };
 
 BoletoBB.prototype.setCedente = function setCedente (obj) {
-  vm.$data.cedente = U.merge(vm.$data.cedente, obj);
+  vm.$data.cedente = merge(vm.$data.cedente, obj);
 };
 
 BoletoBB.prototype.setPagador = function setPagador (obj) {
-  vm.$data.pagador = U.merge(vm.$data.pagador, obj);
+  vm.$data.pagador = merge(vm.$data.pagador, obj);
 };
 
 BoletoBB.prototype.geraBoleto = function geraBoleto (obj) {
-  vm.$data.boleto = U.merge(vm.$data.boleto, obj);
+  vm.$data.boleto = merge(vm.$data.boleto, obj);
 };
 
 BoletoBB.prototype.render = function render (el) {

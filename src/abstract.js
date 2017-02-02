@@ -1,6 +1,6 @@
 import moment from 'moment';
 import VM from './vue';
-import U from './utils';
+import { zeroPad, numberFormat } from './utils';
 import BB from './bb';
 import { moeda, contraApresentacao } from './defaults';
 
@@ -137,7 +137,7 @@ export default {
    */
   getNumeroFebraban() {
     return [
-      U.zeroPad(VM.$data.bancoAtivo, 3),
+      zeroPad(VM.$data.bancoAtivo, 3),
       moeda,
       this.getDigitoVerificador(),
       this.getFatorVencimento(),
@@ -152,7 +152,7 @@ export default {
    */
   getDigitoVerificador() {
     const num = [
-      U.zeroPad(VM.$data.bancoAtivo, 4),
+      zeroPad(VM.$data.bancoAtivo, 4),
       moeda,
       this.getFatorVencimento(),
       this.getValorZeroFill(),
@@ -197,7 +197,7 @@ export default {
    */
   getValorZeroFill() {
     const valor = VM.$data.boleto.valor;
-    return U.zeroPad(U.numberFormat(valor, 2, '', ''), 10);
+    return zeroPad(numberFormat(valor, 2, '', ''), 10);
   },
 
   /**
