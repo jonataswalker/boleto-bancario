@@ -249,6 +249,7 @@
 <script>
 import BB from '../bb';
 import A from '../abstract';
+import { formataDinheiro } from '../utils';
 
 export default {
   props: {
@@ -272,6 +273,7 @@ export default {
     this.C.agenciaCodigo = A.getAgenciaCodigoCedente();
     this.codigoBarras = A.getImagemCodigoDeBarras();
     this.linhaDigitavel = A.getLinhaDigitavel();
+    this.B.valor = formataDinheiro(this.B.valor);
   }
 };
 </script>

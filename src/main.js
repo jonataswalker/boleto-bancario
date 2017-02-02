@@ -1,5 +1,5 @@
 import VM from './vue';
-import U from './utils';
+import { merge } from './utils';
 
 export default class BoletoBB {
   constructor(obj) {
@@ -11,15 +11,15 @@ export default class BoletoBB {
   }
 
   setCedente(obj) {
-    VM.$data.cedente = U.merge(VM.$data.cedente, obj);
+    VM.$data.cedente = merge(VM.$data.cedente, obj);
   }
 
   setPagador(obj) {
-    VM.$data.pagador = U.merge(VM.$data.pagador, obj);
+    VM.$data.pagador = merge(VM.$data.pagador, obj);
   }
 
   geraBoleto(obj) {
-    VM.$data.boleto = U.merge(VM.$data.boleto, obj);
+    VM.$data.boleto = merge(VM.$data.boleto, obj);
   }
 
   render(el) {
